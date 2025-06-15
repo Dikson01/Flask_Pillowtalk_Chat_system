@@ -1,10 +1,16 @@
 from flask import Flask,render_template,request,url_for,redirect,flash
 from forms import UserForm
 from flask_wtf import CSRFProtect
+from flask_sqlalchemy import SQLAlchemy
+from models import db, User
 
 app = Flask(__name__)
 app.secret_key='TopSecretkey'
 csrf = CSRFProtect(app)
+
+app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///users.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+db.init_app(app)
 
 # @app.route('/')
 # def home():
@@ -18,12 +24,14 @@ def index():
 def register():
     form = UserForm()
     if form.validate_on_submit():
-        username = form.username.data
-        email = form.email.data
-        password = form.password.data
+        new_user=User(
+            username = form.username.data,
+            email = form.email.data,
+            password = form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
 
-        print(f"Username : {username}, Email : {email}, Password : {password}")
-        flash(f"User {username} Successfully registered!")
+        flash(f"User Successfully registered!")
 
         return redirect(url_for("register"))
     
