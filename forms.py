@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,IntegerField,SubmitField,EmailField
-from wtforms.validators import DataRequired,Email,NumberRange
+from wtforms import StringField,IntegerField,SubmitField,EmailField,PasswordField
+from wtforms.validators import DataRequired,Email,NumberRange,Length
 
 class UserForm(FlaskForm):
-    name = StringField("name",validators=[DataRequired()])
+    username = StringField("username",validators=[DataRequired(),Length(min=3)])
     email = EmailField("email",validators=[DataRequired(),Email()])
-    age = IntegerField("age",validators=[DataRequired(),NumberRange(min = 18, max = 65)])
+    password = PasswordField("password",validators=[DataRequired(),Length(min = 6)])
     submit = SubmitField("submit")
     

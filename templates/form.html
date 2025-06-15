@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Registration {% endblock %}
+
+    {% block content %}
+    <h1>User Registrstion</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    <ul>
+        {% for msg in messages %}
+        <li style="color: greenyellow;">{{ msg }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endif %}
+    {% endwith %}
+
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p>{{ form.username.label }}<br>
+        {{ form.username(size=32) }}</p>
+
+        <p>{{ form.email.label }}<br>
+        {{ form.email(size=32) }}</p>
+
+        <p>{{ form.password.label }}<br>
+        {{ form.password(size=32) }}</p>
+
+        <p>{{ form.submit() }}</p>
+
+    </form>
+    {% endblock %}
