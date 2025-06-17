@@ -13,8 +13,12 @@
         <nav>
             <img src="{{ url_for('static', filename='images/Flask.png') }}" alt="Flask_img" width="50">
             <a href="/">Home</a>
+            {% if current_user.is_authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
             <a href="/register">Register</a>
             <a href="/login">Login</a>
+            {% endif %}
         </nav>
     </header>
 

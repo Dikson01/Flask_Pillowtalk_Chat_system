@@ -19,9 +19,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-# @app.route('/')
-# def home():
-#     return 'yo bro this is my flask page 1'
 
 @app.route('/')
 def index():
@@ -83,9 +80,14 @@ def load_user(user_id):
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return f"Hello, {current_user.username}"
-        
+    return render_template("dashboard.html")
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("Logout successfully","success")
+    return redirect(url_for("index"))
 
 if __name__ == '__main__':
     app.run(debug=True)
