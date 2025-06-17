@@ -2,6 +2,59 @@
 
 {% block title %}Home{% endblock %}
     {% block content %}
-    <h1>Lesss go this is my flask log_in and sign_up project</h1>
-    <p><a href="/register">go to form</a></p>
+    <section>
+    <h1>Welcome to Our Secure Login System</h1>
+    <p>
+        This project demonstrates a secure and modern user authentication system using Flask. 
+        With proper form validation, hashed password storage, and user session management, this site ensures both functionality and security for all users.
+    </p>
+
+    <h2>Features:</h2>
+    <ul>
+        <li>User Registration with form validation</li>
+        <li>Login with secure password handling</li>
+        <li>Flash messages for user feedback</li>
+        <li>Session management with logout support</li>
+        <li>Sticky header and footer UI layout</li>
+    </ul>
+
+    <h2>About This Project</h2>
+    <p>
+        This simple Flask application serves as a foundation for any larger authentication-based project. It uses:
+        <ul>
+            <li><strong>Flask-WTF</strong> for form handling</li>
+            <li><strong>Flask-Login</strong> for managing user sessions</li>
+            <li><strong>SQLite</strong> for lightweight database needs</li>
+            <li><strong>Jinja2 templating</strong> for dynamic HTML pages</li>
+        </ul>
+    </p>
+
+    <h2>Why Use This App?</h2>
+    <p>
+        Whether you're building a portfolio site, an internal dashboard, or a full-fledged web application, starting with a solid login/signup system saves time and ensures users' data is protected. 
+        You can easily expand this app to include:
+    </p>
+    <ul>
+        <li>Password reset via email</li>
+        <li>User roles (admin/user)</li>
+        <li>Profile pages</li>
+        <li>Two-factor authentication</li>
+    </ul>
+
+    <h2>Try It Out!</h2>
+    <p>
+        If you're new, click "Sign Up" to create an account. Already have one? Click "Login" and test the authentication. 
+        After logging in, you'll see a custom dashboard showing your user details.
+    </p>
+
+    <p>
+        This page is intentionally long to demonstrate a fully scrollable layout. You can use this content to test your sticky header and footer!
+    </p>
+
+    <h2>Credits</h2>
+    <p>
+        Created by <strong>Dikson Sharma</strong> as a practice project to master Flask and build secure login systems. You can fork the GitHub repo and use it in your own projects.
+    </p>
+</section>
+
     {% endblock %}

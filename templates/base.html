@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Flask log_iin system {% endblock %}  </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     
     <header>
-        <h2>Flask Log_in System</h2>
+        <h2>Flask Log_in System </h2>
         <nav>
+            <img src="{{ url_for('static', filename='images/Flask.png') }}" alt="Flask_img" width="50">
             <a href="/">Home</a>
             <a href="/register">Register</a>
             <a href="/login">Login</a>

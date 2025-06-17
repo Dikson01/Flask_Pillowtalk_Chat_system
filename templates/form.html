@@ -5,12 +5,12 @@
     {% block content %}
     <h1>User Registrstion</h1>
 
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories = True) %}
     {% if messages %}
 
     <ul>
-        {% for msg in messages %}
-        <li style="color: rgb(49, 197, 0);">{{ msg }}</li>
+        {% for cate,msg in messages %}
+        <li class="flash {{ cate }}">{{ msg }}</li>
         {% endfor %}
     </ul>
     
@@ -28,7 +28,17 @@
         {{ form.email(size=32) }}</p>
 
         <p>{{ form.password.label }}<br>
-        {{ form.password(size=32) }}</p>
+        {{ form.password(size=32) }}
+        {% for error in form.password.errors %}<br>
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}</p>
+
+
+        <p>{{ form.confirm_password.label }}<br>
+        {{ form.confirm_password(size=32) }}<br>
+        {% for error in form.confirm_password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}</p>        
 
         <p>{{ form.submit() }}</p>
 
