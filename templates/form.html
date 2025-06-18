@@ -5,17 +5,17 @@
     {% block content %}
     <h1>User Registrstion</h1>
 
-    {% with messages = get_flashed_messages(with_categories = True) %}
-    {% if messages %}
+            {% with messages = get_flashed_messages(with_categories = True) %}
+            {% if messages %}
 
-    <ul>
-        {% for cate,msg in messages %}
-        <li class="flash {{ cate }}">{{ msg }}</li>
-        {% endfor %}
-    </ul>
-    
-    {% endif %}
-    {% endwith %}
+            <ul>
+                {% for cate,msg in messages %}
+                <li class="flash {{ cate }}">{{ msg }}</li>
+                {% endfor %}
+            </ul>
+            
+            {% endif %}
+            {% endwith %}
 
 
     <form method="POST">

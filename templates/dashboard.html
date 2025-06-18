@@ -2,7 +2,18 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 
+{% with messages = get_flashed_messages(with_categories = True) %}
+{% if messages %}
+
+<ul>
+    {% for cate,msg in messages %}
+    <li class="flash {{ cate }}">{{ msg }}</li>
+    {% endfor %}
+</ul>
+        
+{% endif %}
+{% endwith %}
+
 <h1>Welcome {{ current_user.username }}!</h1>
-<a href="{{ url_for('logout') }}">Logout</a>
 
 {% endblock %}

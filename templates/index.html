@@ -2,6 +2,19 @@
 
 {% block title %}Home{% endblock %}
     {% block content %}
+
+        {% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+
+    <ul>
+        {% for cate,msg in messages %}
+        <li class="flash {{ cate }}">{{ msg }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endif %}
+    {% endwith %}
+
     <section>
     <h1>Welcome to Our Secure Login System</h1>
     <p>
