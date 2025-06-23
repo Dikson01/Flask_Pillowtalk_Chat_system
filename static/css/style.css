@@ -52,13 +52,13 @@ main {
 
 /* Form styles */
 form {
-    background: white;
+    /* background: white; */
     padding: 20px;
     border-radius: 10px;
     width: 90%;
     max-width: 400px;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 form p {
@@ -77,4 +77,50 @@ form p {
   background-color: #f8d7da;
   padding: 10px;
   border-radius: 5px;
+}
+
+
+/* this is css for admin panel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 80px; /* Fix action column width */
+}
+td form {
+    display: inline; /* ONLY forms inside table cells */
+}
+
+.delete-btn {
+    all: unset;
+    background-color: #e74c3c;
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto;
+    max-width: 80px;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.delete-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }

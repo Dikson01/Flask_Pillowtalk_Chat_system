@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Admin Panal{% endblock %}
+{% block content %}
+
+    <h2>Welcome Admin: {{ current_user.username }}</h2>
+    <h3>All Registered Users:</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+                <td>
+                    {% if user.id != current_user.id %}
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
+                    </form>
+                    {% else %}
+                        (You)
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

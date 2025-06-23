@@ -1,6 +1,6 @@
-from flask import Flask,render_template,request,url_for,redirect,flash,current_app
+from flask import Flask,render_template,url_for,redirect,flash
 from forms import UserForm, LoginForm, ResetPasswordForm, ForgotPasswordForm
-from flask_wtf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -12,6 +12,9 @@ app = Flask(__name__)
 app.secret_key='TopSecretkey'
 csrf = CSRFProtect(app)
 s = URLSafeTimedSerializer(app.secret_key)
+@app.context_processor
+def inject_csrf_token():
+    return dict(csrf_token=generate_csrf)
 
 app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///users.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
@@ -48,12 +51,17 @@ def register():
         if existing_user:
             flash("username or email already exist try another.",'danger')
             return render_template("form.html",form=form)
-
         hashed_password = generate_password_hash(form.password.data)
+        if User.query.first() is None:
+            is_admin = True
+        else:
+            is_admin = False
+
         new_user=User(
             username = form.username.data,
             email = form.email.data,
-            password = hashed_password)
+            password = hashed_password,
+        is_admin = is_admin)
         db.session.add(new_user)
         db.session.commit()
 
@@ -107,16 +115,6 @@ def logout():
     return redirect(url_for("index"))
 
 
-
-@app.route('/send-test-email')
-def send_test_email():
-    msg = Message("Hello from Flask",
-                  recipients=["rajanspolia241@gmail.com"])
-    msg.body = "This is a test email sent from Flask-Mail."
-    mail.send(msg)
-    return "Email sent!"
-
-
 @app.route("/forgotpassword", methods=["GET", "POST"])
 def forgotpassword():
     form = ForgotPasswordForm()
@@ -130,13 +128,9 @@ def forgotpassword():
             msg = Message("Password Reset Request",
                           recipients=[user.email])
             msg.body = f'''Hi {user.username},
-
-To reset your password, click the link below:
-
-{reset_url}
-
-If you didn’t request this, ignore this email.
-'''
+            To reset your password, click the link below:
+            {reset_url}
+            If you didn’t request this, ignore this email.'''
             mail.send(msg)
             flash("A password reset link has been sent to your email.", "info")
             return redirect(url_for('login'))
@@ -149,7 +143,6 @@ If you didn’t request this, ignore this email.
 def resetpassword(token):
     form = ResetPasswordForm()
     try:
-        # Decode the token using the same salt and max age
         email = s.loads(token, salt='password-reset-salt', max_age=1800)
     except SignatureExpired:
         flash("The reset link has expired. Please request a new one.", "danger")
@@ -173,6 +166,31 @@ def resetpassword(token):
         return redirect(url_for("login"))
 
     return render_template("resetpassword.html", form=form)
+
+
+@app.route("/admin")
+@login_required
+def admin():
+    if not current_user.is_admin:   # Check if the logged-in user is NOT an admin
+        return "Access Denied. Admins only!", 403   # Block access with HTTP 403 Forbidden
+
+    users = User.query.all()   # Fetch all users from the database
+    return render_template('admin.html', users=users) 
+
+
+@app.route("/deleteuser/<int:user_id>",methods=["POST"])
+@login_required
+def delete_user(user_id):
+    if not current_user.is_admin:
+        return "Access Denied. Admin only!",403
+    user_to_delete = User.query.get_or_404(user_id)
+    if user_to_delete.id == current_user.id:
+        flash("You can't delete yourself!","danger")
+        return redirect(url_for('admin'))
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    flash(f"User: {user_to_delete.username} is deleted successfully!", "success")
+    return redirect(url_for("admin"))
 
 
 
