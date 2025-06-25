@@ -334,5 +334,9 @@ def handle_leave_chat(data):
     send({'msg': 'The other user has left the chat.', 'sender': 'system'}, to=room)
 
 
+with app.app_context():
+    db.create_all()
+    
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
