@@ -85,7 +85,9 @@ def register():
         db.session.commit()
 
         msg = Message("Welcome To Dikson's app!", recipients=[new_user.email])
-        msg.body = f'''Hi {new_user.username},\nWelcome to our Flask app!\nLet us know if you ever need help.\nCheers,\nTeam Dikson'''
+        msg.body = f'''Hi {new_user.username},\nWelcome to PillowTalk — we’re thrilled to have you here!\nWhether you're in the mood for deep chats or light laughs, you're in the right place.\nIf you ever need help, just give us a shout.\n\nFeel free to explore, connect, and enjoy your time with us.
+        \nCheers,
+        \nTeam Dikson 🌙'''
         mail.send(msg)
 
         flash('Registration successful!', 'success')
