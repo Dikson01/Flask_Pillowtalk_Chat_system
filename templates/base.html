@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Flask log_iin system {% endblock %}  </title>
+    <title>{% block title %}Flask Login System{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    <header>
-        <h2>Flask Log_in System </h2>
-        <nav>
-            <img src="{{ url_for('static', filename='images/Flask.png') }}" alt="Flask_img" width="50">
+   <header>
+    <nav class="navbar">
+        <!-- Logo on the left -->
+        <div class="logo-left">
+            <a href="/"><img src="{{ url_for('static', filename='images/Pillowtalk.png') }}" alt="Pillow Logo" width="40"></a>
+        </div>
+
+        <!-- Center Title -->
+        <div class="nav-title">Pillow Talk</div>
+
+        <!-- Navigation Links on the right -->
+        <div class="nav-links">
             <a href="/">Home</a>
             {% if current_user.is_authenticated %}
-            <a href="/logout">Logout</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
             {% else %}
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
             {% endif %}
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
     <main>
-        {% block content %}
-
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <footer>
-        <p>&copy; 2025 Flaskapp. All rights reserverd.</p>
+        <p>&copy; 2025 FlaskApp. All rights reserved.</p>
     </footer>
-
 </body>
 </html>

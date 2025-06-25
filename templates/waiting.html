@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 50px;">
+    <h2>🕒 Waiting for someone to connect...</h2>
+    <p>Hang tight! As soon as someone joins, you'll be redirected to the chat room.</p>
+    <div id="loader" style="font-size: 30px; margin-top: 20px;">⏳</div>
+</div>
+
+<script>
+    async function checkMatch() {
+        const response = await fetch("/check-match");
+        const data = await response.json();
+
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        }
+    }
+
+    // Check every 3 seconds
+    setInterval(checkMatch, 3000);
+</script>
+{% endblock %}

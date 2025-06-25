@@ -3,17 +3,47 @@
 {% block content %}
 
 {% with messages = get_flashed_messages(with_categories = True) %}
-{% if messages %}
-
-<ul>
-    {% for cate,msg in messages %}
-    <li class="flash {{ cate }}">{{ msg }}</li>
-    {% endfor %}
-</ul>
-        
-{% endif %}
+  {% if messages %}
+    <ul>
+      {% for cate, msg in messages %}
+        <li class="flash {{ cate }}">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endwith %}
 
-<h1>Welcome {{ current_user.username }}!</h1>
+<h1 class="dashboard-title">Welcome {{ current_user.username }}!</h1>
+
+<!-- Interest-Based Anonymous Chat -->
+<div class="dashboard-container">
+  <form action="{{ url_for('join_chat') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <label class="dashboard-label" for="interest">Choose a topic to chat about:</label>
+    <select name="interest" id="interest" required class="dashboard-select">
+      <option value="movies">🎬 Movies & TV Shows - Discuss your favorite films, series, or recent releases.</option>
+      <option value="travel">✈️ Travel & Destinations - Share travel experiences or dream vacation spots.</option>
+      <option value="food">🍕 Food & Cooking - Talk about favorite dishes, recipes, or restaurants.</option>
+      <option value="technology">📱 Technology & Gadgets - Discuss the latest smartphones, apps, or tech trends.</option>
+      <option value="books">📚 Books & Literature - Chat about fiction, non-fiction, authors, and recommendations.</option>
+      <option value="fitness">💪 Fitness & Health - Discuss workouts, mental health, and fitness tips.</option>
+      <option value="music">🎵 Music & Songs - Talk about favorite genres, artists, and concerts.</option>
+      <option value="gaming">🎮 Gaming & Esports - Share game recommendations, tips, and gaming news.</option>
+      <option value="relationships">❤️ Relationships & Dating - Friendly chats about love, friendship, and dating advice.</option>
+      <option value="career">💼 Career & Education - Discuss job tips, career growth, and study resources.</option>
+      <option value="science">🔬 Science & Space - Talk about discoveries, space missions, and futuristic tech.</option>
+      <option value="sports">🏅 Sports & Outdoor Activities - Chat about cricket, football, hiking, or any sport you like.</option>
+      <option value="anime">🐉 Anime & Manga - Discuss your favorite anime series, manga, and upcoming releases.</option>
+      <option value="memes">😂 Memes & Humor - Light chat to share funny jokes, memes, and hilarious moments.</option>
+      <option value="life">📖 Life Experiences & Daily Stories - Share real-life experiences or what happened today.</option>
+      <option value="no_preference" selected>🌐 No Preference - Match me with anyone available.</option>
+    </select>
+
+    <button type="submit" class="dashboard-btn">
+      Join Anonymous Chat 💬
+    </button>
+  </form>
+</div>
+
 
 {% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="chat-title">💬 Anonymous Chat Room</h2>
+
+<!-- Timer display -->
+<div id="chat-timer" class="chat-timer"></div>
+
+<div id="chat-box" class="chat-box"></div>
+
+<div class="chat-input-container">
+    <input type="text" id="message-input" placeholder="Type your message..." class="chat-input">
+    <button onclick="sendMessage()" class="chat-send-btn">Send</button>
+    <button onclick="leaveChat()" class="chat-leave-btn">🚪 Leave Chat</button>
+</div>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+    const socket = io();
+    const room = "{{ room_id }}";
+    const myId = Math.random().toString(36).substring(2, 10); 
+
+    socket.emit("join", { room: room });
+
+    socket.on("message", function(data) {
+        const box = document.getElementById("chat-box");
+
+        if (data.sender === 'system') {
+            const systemMessageHTML = `
+                <div class="system-message">
+                    ⚠️ ${data.msg}
+                </div>
+            `;
+            box.innerHTML += systemMessageHTML;
+        } else {
+            const isMine = data.sender === myId;
+            const messageHTML = `
+                <div class="chat-message ${isMine ? 'mine' : 'theirs'}">
+                    <span>${data.msg}</span>
+                </div>
+            `;
+            box.innerHTML += messageHTML;
+        }
+
+        box.scrollTop = box.scrollHeight;
+    });
+
+    let timer = 420; // seconds for demo
+    const timerDiv = document.getElementById("chat-timer");
+
+    const countdown = setInterval(() => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        timerDiv.textContent = `⏳ Chat will end in: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (--timer < 0) {
+            clearInterval(countdown);
+            timerDiv.textContent = "🔴 Chat ended automatically.";
+            socket.emit("leave_chat", { room: room });
+            setTimeout(() => {
+                socket.disconnect();
+                window.location.href = "/dashboard";
+            }, 500);
+        }
+    }, 1000);
+
+    function sendMessage() {
+        const input = document.getElementById("message-input");
+        const msg = input.value.trim();
+        if (msg) {
+            socket.emit("message", { room: room, msg: msg, sender: myId });
+            input.value = "";
+        }
+    }
+
+    function leaveChat() {
+        socket.emit("leave_chat", { room: room });
+        setTimeout(() => {
+            socket.disconnect();
+            window.location.href = "/dashboard";
+        }, 300);
+    }
+
+    window.addEventListener("beforeunload", function() {
+        socket.emit("leave_chat", { room: room });
+    });
+</script>
+{% endblock %}

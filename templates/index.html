@@ -3,71 +3,77 @@
 {% block title %}Home{% endblock %}
     {% block content %}
 
-        {% with messages = get_flashed_messages(with_categories = True) %}
+{% with messages = get_flashed_messages(with_categories = True) %}
     {% if messages %}
-
     <ul>
-        {% for cate,msg in messages %}
-        <li class="flash {{ cate }}">{{ msg }}</li>
+        {% for cate, msg in messages %}
+            <li class="flash {{ cate }}">{{ msg }}</li>
         {% endfor %}
     </ul>
-    
     {% endif %}
-    {% endwith %}
+{% endwith %}
 
-    <section>
-    <h1>Welcome to Our Secure Login System</h1>
+<section>
+    <h1>Welcome to PillowTalks 👥</h1>
     <p>
-        This project demonstrates a secure and modern user authentication system using Flask. 
-        With proper form validation, hashed password storage, and user session management, this site ensures both functionality and security for all users.
+        <strong>PillowTalks</strong> is a safe, anonymous chat platform built using Flask where users can talk freely without revealing their identity.
+        Whether you're looking for deep conversation, casual chat, or just someone to listen — PillowTalks connects you instantly.
     </p>
 
-    <h2>Features:</h2>
+    <h2>✨ Features</h2>
     <ul>
-        <li>User Registration with form validation</li>
-        <li>Login with secure password handling</li>
-        <li>Flash messages for user feedback</li>
-        <li>Session management with logout support</li>
-        <li>Sticky header and footer UI layout</li>
+        <li>Anonymous 1-on-1 chat system</li>
+        <li>Interest-based matchmaking</li>
+        <li>Timer-based auto chat session (e.g., 7 mins limit)</li>
+        <li>Flask-SocketIO for real-time chat</li>
+        <li>User authentication system (login/signup/logout)</li>
+        <li>Secure password handling with hashing</li>
+        <li>Flash messages and session management</li>
+        <li>Dashboard for user access</li>
     </ul>
 
-    <h2>About This Project</h2>
+    <h2>💡 How It Works</h2>
     <p>
-        This simple Flask application serves as a foundation for any larger authentication-based project. It uses:
-        <ul>
-            <li><strong>Flask-WTF</strong> for form handling</li>
-            <li><strong>Flask-Login</strong> for managing user sessions</li>
-            <li><strong>SQLite</strong> for lightweight database needs</li>
-            <li><strong>Jinja2 templating</strong> for dynamic HTML pages</li>
-        </ul>
+        Once you're logged in, you can enter the anonymous chat system. Based on your selected interests (e.g., movies, travel, tech, etc.), we match you with a like-minded stranger.
+        The conversation is private, real-time, and disappears after the session ends.
     </p>
 
-    <h2>Why Use This App?</h2>
-    <p>
-        Whether you're building a portfolio site, an internal dashboard, or a full-fledged web application, starting with a solid login/signup system saves time and ensures users' data is protected. 
-        You can easily expand this app to include:
-    </p>
+    <h2>🛠️ Tech Stack</h2>
     <ul>
-        <li>Password reset via email</li>
-        <li>User roles (admin/user)</li>
-        <li>Profile pages</li>
-        <li>Two-factor authentication</li>
+        <li><strong>Flask</strong> – lightweight Python web framework</li>
+        <li><strong>Flask-SocketIO</strong> – real-time bi-directional communication</li>
+        <li><strong>Flask-Login</strong> – user authentication/session handling</li>
+        <li><strong>SQLite</strong> – simple and fast database</li>
+        <li><strong>WTForms</strong> – form validation and rendering</li>
+        <li><strong>Jinja2</strong> – templating for dynamic HTML pages</li>
     </ul>
 
-    <h2>Try It Out!</h2>
+    <h2>🎯 Why PillowTalks?</h2>
     <p>
-        If you're new, click "Sign Up" to create an account. Already have one? Click "Login" and test the authentication. 
-        After logging in, you'll see a custom dashboard showing your user details.
+        In today's fast-paced world, everyone needs a space to talk — freely and without judgment. PillowTalks gives you that space.
+        No names, no profiles, no pressure. Just human connection, pure and simple.
+    </p>
+
+    <h2>🚀 Ready to Start?</h2>
+    <p>
+        New here? <a href="/register">Sign up</a> and jump in! Already have an account? <a href="/login">Login</a> to find your next anonymous chat partner.
     </p>
 
     <p>
-        This page is intentionally long to demonstrate a fully scrollable layout. You can use this content to test your sticky header and footer!
+        This home page also serves as a scroll test to check your sticky navbar and footer layout.
     </p>
 
-    <h2>Credits</h2>
+    <h2>👨‍💻 Project by Dikson Sharma</h2>
     <p>
-        Created by <strong>Dikson Sharma</strong> as a practice project to master Flask and build secure login systems. You can fork the GitHub repo and use it in your own projects.
+        Built as a passion project to master Flask and create something meaningful. Feel free to fork it on GitHub and expand it further with:
     </p>
+    <ul>
+        <li>Voice/video chat</li>
+        <li>Friend system & blocking</li>
+        <li>Chatroom history (temporary/local only)</li>
+        <li>End-to-end encryption</li>
+    </ul>
 </section>
+
 
     {% endblock %}

@@ -1,126 +1,383 @@
-/* Global settings */
+/* Base.css - Specific for base.html (Header, Footer, General Layout) */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    color: #000;
-    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #494848;  /* Dark background */
+    color: #e0e0e0;             /* Light text */
 }
 
-/* Header */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background-color: #333;
-    color: white;
+.navbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    background-color: #1f1f1f;
+    padding: 10px 20px;
+    position: relative;
 }
 
-/* Footer */
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background-color: #333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+.logo-left img {
+    width: 40px;
 }
 
-/* Navigation links inside header */
-nav a {
-    color: white;
+/* Center Title */
+.nav-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff9dbb;
+    white-space: nowrap;
+}
+
+/* Right-side nav links */
+.nav-links a {
+    margin-left: 15px;
+    color: #ffffff;
     text-decoration: none;
-    margin: 0 15px;
 }
 
-/* Main content area */
+
 main {
-    padding: 70px 20px 60px;  /* Top and bottom space for header/footer */
+    padding: 40px 20px;
+    min-height: 80vh;
 }
 
-/* Form styles */
+footer {
+    background-color: #1f1f1f;
+    text-align: center;
+    padding: 15px 0;
+    color: #888888;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.7);
+}
+
+img {
+    filter: brightness(0.9) contrast(1.1);
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* index.html specific styles */
+
+section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    color: #ddd;
+}
+
+section h1 {
+    font-size: 28px;
+    color: #4fc3f7;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 22px;
+    color: #90caf9;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-top: 25px;
+}
+
+section p {
+    line-height: 1.7;
+    font-size: 16px;
+    color: #ccc;
+    margin: 10px 0;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+section ul li {
+    background-color: #2a2a2a;
+    margin: 6px 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #eee;
+    transition: background 0.3s;
+}
+
+section ul li:hover {
+    background-color: #333;
+}
+
+a {
+    color: #4fc3f7;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #81d4fa;
+}
+
+.flash {
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.flash.success {
+    background-color: #2e7d32;
+    color: #c8e6c9;
+}
+
+.flash.danger {
+    background-color: #c62828;
+    color: #ffcdd2;
+}
+
+.flash.info {
+    background-color: #1565c0;
+    color: #bbdefb;
+}
+
+/* Registration Form Styling - Dark Theme */
+
 form {
-    /* background: white; */
+    background-color: #1e1e2f;
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-    margin: 0 auto;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    max-width: 450px;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    color: #ddd;
+    font-family: 'Poppins', sans-serif;
 }
 
 form p {
     margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #f0f0f0;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2c2c3e;
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+form input[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+}
+
+form input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 6px;
+    margin: 10px 0;
+    text-align: center;
 }
 
 .flash.success {
-  color: green;
-  background-color: #d4edda;
-  padding: 10px;
-  border-radius: 5px;
+    background-color: #155724;
+    color: #d4edda;
 }
 
 .flash.danger {
-  color: red;
-  background-color: #f8d7da;
-  padding: 10px;
-  border-radius: 5px;
+    background-color: #721c24;
+    color: #f8d7da;
+}
+
+span {
+    font-size: 0.85rem;
+    color: #ff6b6b;
 }
 
 
-/* this is css for admin panel */
-table {
+/* Dashboard page styles (no conflict) */
+.dashboard-title {
+    text-align: center;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.dashboard-label {
+    color: #ddd;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-select {
     width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
+    padding: 12px 15px;
+    margin: 15px 0 25px 0;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #1e1e1e;
+    color: #ddd;
+    font-size: 16px;
+    transition: border 0.3s;
 }
 
-th, td {
-    padding: 8px;
-    border: 1px solid #ccc;
-    text-align: center;
-    vertical-align: middle;
-    word-wrap: break-word;
-}
-
-th:nth-child(5),
-td:nth-child(5) {
-    width: 80px; /* Fix action column width */
-}
-td form {
-    display: inline; /* ONLY forms inside table cells */
-}
-
-.delete-btn {
-    all: unset;
-    background-color: #e74c3c;
-    color: white;
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    box-sizing: border-box;
-    width: auto;
-    max-width: 80px;
+.dashboard-select:focus {
+    border: 1px solid #1e90ff;
     outline: none;
-    box-shadow: none !important;
 }
 
-.delete-btn:focus {
-    outline: none !important;
-    box-shadow: none !important;
+.dashboard-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.dashboard-btn:hover {
+    background-color: #63b3ed;
+}
+
+
+/* Chat Page Styles */
+
+.chat-title {
+    text-align: center;
+    color: #00ffff;
+    font-size: 26px;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.chat-timer {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+.chat-box {
+    background-color: #1f1f1f;
+    border: 1px solid #444;
+    height: 300px;
+    padding: 10px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #ddd;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.chat-send-btn, .chat-leave-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.chat-send-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.chat-send-btn:hover {
+    background-color: #45d86c;
+}
+
+.chat-leave-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.chat-leave-btn:hover {
+    background-color: #ff4f5e;
+}
+
+.chat-message {
+    margin: 5px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.chat-message.mine {
+    background-color: #4b0082;
+    color: white;
+    align-self: flex-end;
+    float: right;
+    clear: both;
+}
+
+.chat-message.theirs {
+    background-color: #3333cc;
+    color: white;
+    align-self: flex-start;
+    float: left;
+    clear: both;
+}
+
+.system-message {
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    margin: 8px 0;
 }
