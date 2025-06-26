@@ -10,7 +10,10 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_socketio import SocketIO, join_room, leave_room, send
 import uuid
 import time
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'TopSecretkey'
 csrf = CSRFProtect(app)
@@ -28,9 +31,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = "diksonsharma616@gmail.com"
-app.config['MAIL_PASSWORD'] = "diko kzha cvkr wjov"
-app.config['MAIL_DEFAULT_SENDER'] = "diksonsharma616@gmail.com"
+app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get("MAIL_DEFAULT_SENDER")
 
 db.init_app(app)
 mail = Mail(app)
